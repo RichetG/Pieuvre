@@ -49,17 +49,14 @@ void Projet::parser(string file)
                 vector<string>mots=split(ligne, ' ');
                 Vertex *vertex=new Vertex(std::atof(mots.at(1).c_str()), std::atof(mots.at(2).c_str()),std::atof(mots.at(3).c_str()));
                 listVertex.push_back(*vertex);
-                cout<<vertex->print()<<endl;
             }else if(ligne.compare(0, 2, "vt")==0){
                 vector<string>mots=split(ligne, ' ');
                 Texture *texture=new Texture(std::atof(mots.at(1).c_str()), std::atof(mots.at(2).c_str()));
                 listTexture.push_back(*texture);
-                cout<<texture->print()<<endl;
             }else if(ligne.compare(0, 2, "vn")==0){
                 vector<string>mots=split(ligne, ' ');
                 Normale *normale=new Normale(std::atof(mots.at(1).c_str()), std::atof(mots.at(2).c_str()),std::atof(mots.at(3).c_str()));
                 listNormale.push_back(*normale);
-                cout<<normale->print()<<endl;
             }else if(ligne.compare(0, 2, "f ")==0){
                 vector<string>mots=split(ligne, ' ');
                 Face *face=new Face();
@@ -76,7 +73,6 @@ void Projet::parser(string file)
 
                 }
                 listFace.push_back(*face);
-                cout<<face->print()<<endl;
             }
         }
     }
