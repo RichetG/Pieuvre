@@ -6,12 +6,12 @@ class TripletFace{
 public:
     TripletFace(int v, int vt, int vn);
     TripletFace(int v, int vt);
-    double getV();
-    double getVT();
-    double getVN();
-    void setV(double v);
-    void setVT(double vt);
-    void setVN(double vn);
+    int getV();
+    int getVT();
+    int getVN();
+    void setV(int v);
+    void setVT(int vt);
+    void setVN(int vn);
     string print();
 
 private:

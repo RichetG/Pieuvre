@@ -22,19 +22,19 @@
 
 #include "projet.h"
 #include <qapplication.h>
+#include <iostream>
 
-int main(/*int argc, char** argv*/)
+int main(int argc, char** argv)
 {
-  /*QApplication application(argc,argv);
+  QApplication application(argc,argv);
 
   Viewer viewer;
 
   viewer.setWindowTitle("animation");
 
-  viewer.show();*/
+  viewer.show();
 
-  Projet projet;
-  projet.parser("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Projet\\test.obj");
-
-  //return application.exec();
+  /*Projet *projet=new Projet("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\testCube.obj");
+  projet->draw();*/
+  return application.exec();
 }

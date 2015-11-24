@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <GL/glu.h>
+#include <GL/gl.h>
 
 using namespace qglviewer;
 using namespace std;
@@ -11,30 +13,38 @@ using namespace std;
 
 void Viewer::init()
 {
-  /*restoreStateFromFile();
+  restoreStateFromFile();
   glDisable(GL_LIGHTING);
-  nbPoint = 4;
-  points = new Point[nbPoint];
-  glPointSize(5.0);
+  projet =new Projet("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\ElPoulpo.obj");
+  GLuint texture=projet->loadTexture("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\poulpotext.jpg", 1024, 1024);
+  //glEnable(GL_TEXTURE_2D);
   setGridIsDrawn();
-  startAnimation();*/
+  startAnimation();
+
 }
 
 void Viewer::draw()
 {
- /* glBegin(GL_POINTS);
-  for (int i=0; i<nbPoint; i++)
-   points[i].draw();
-  glEnd();*/
+    projet->init();
+}
+
+void Viewer::animate()
+{
+
 }
 
 ///////////////////////   Projet   ///////////////////////////////
 
-Projet::Projet()
+Projet::Projet(string file)
 {
-  init();
+  parser(file);
 }
 
+/**
+ * Récupération du contenue d'un fichier obj
+ * @brief Projet::parser
+ * @param file
+ */
 void Projet::parser(string file)
 {
     listVertex.clear();
@@ -49,7 +59,6 @@ void Projet::parser(string file)
                 vector<string>mots=split(ligne, ' ');
                 Vertex *vertex=new Vertex(std::atof(mots.at(1).c_str()), std::atof(mots.at(2).c_str()),std::atof(mots.at(3).c_str()));
                 listVertex.push_back(*vertex);
-                cout<<vertex->print()<<endl;
             }else if(ligne.compare(0, 2, "vt")==0){
                 vector<string>mots=split(ligne, ' ');
                 Texture *texture=new Texture(std::atof(mots.at(1).c_str()), std::atof(mots.at(2).c_str()));
@@ -71,7 +80,6 @@ void Projet::parser(string file)
                         TripletFace *triplet=new TripletFace(std::atof(index.at(0).c_str()), std::atof(index.at(1).c_str()), std::atof(index.at(2).c_str()));
                         face->add(*triplet);
                     }
-
                 }
                 listFace.push_back(*face);
             }
@@ -81,16 +89,61 @@ void Projet::parser(string file)
 
 void Projet::draw()
 {
- /* glColor3f(1.0,0.0, 0.0);
-  glVertex3fv(pos_);*/
+    
 }
 
 
 void Projet::init()
 {
-  //pos_ = Vec(0.4*rand()/RAND_MAX, 0.4*rand()/RAND_MAX, 0.4*rand()/RAND_MAX);
+    glLineWidth(1.0);
+    for(int i=0; i<listFace.size(); i++){
+        glBegin(GL_POLYGON);
+        for(int j=0; j<listFace.at(i).size(); j++){
+            Vertex vertex=listVertex.at(listFace.at(i).at(j).getV()-1);
+            Texture texture=listTexture.at(listFace.at(i).at(j).getVT()-1);
+            Normale normale=listNormale.at(listFace.at(i).at(j).getVN()-1);
+            glNormal3d(normale.getX(), normale.getY(), normale.getZ());
+            glTexCoord2d(texture.getX(), texture.getY());
+            glVertex3d(vertex.getX(), vertex.getY(), vertex.getZ());
+        }
+        glEnd();
+        glFlush();
+    }
 }
 
+void Projet::animate()
+{
+
+}
+
+/**
+ * Chargement de la texture
+ * @brief Projet::loadTexture
+ * @param filename
+ * @param width
+ * @param height
+ * @return
+ */
+GLuint Projet::loadTexture(const char* filename, int width, int height){
+    QImage image(filename, "JPG");
+    glEnable(GL_TEXTURE_2D);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image.bits());
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    return texture;
+}
+
+/**
+ * Séparation d'une phrase à partir d'un caractère
+ * @brief Projet::split
+ * @param sentence
+ * @param delimiter
+ * @return liste de mots
+ */
 vector<string> Projet::split(string sentence, char delimiter){
     vector<string>tmp;
     istringstream iss(sentence);
