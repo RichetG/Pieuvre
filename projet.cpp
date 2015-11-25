@@ -16,8 +16,7 @@ void Viewer::init()
   restoreStateFromFile();
   glDisable(GL_LIGHTING);
   projet =new Projet("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\ElPoulpo.obj");
-  GLuint texture=projet->loadTexture("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\poulpotext.jpg", 1024, 1024);
-  //glEnable(GL_TEXTURE_2D);
+  GLuint texture=projet->loadTexture("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\poulpotext.jpg");
   setGridIsDrawn();
   startAnimation();
 
@@ -89,7 +88,7 @@ void Projet::parser(string file)
 
 void Projet::draw()
 {
-    
+
 }
 
 
@@ -124,17 +123,18 @@ void Projet::animate()
  * @param height
  * @return
  */
-GLuint Projet::loadTexture(const char* filename, int width, int height){
+GLuint Projet::loadTexture(QString filename){
     QImage image(filename, "JPG");
+    QImage img=QGLWidget::convertToGLFormat(image);
     glEnable(GL_TEXTURE_2D);
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image.bits());
+    glGenTextures(1, &texture[0]);
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, img.width(), img.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img.bits());
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    return texture;
+    return texture[0];
 }
 
 /**

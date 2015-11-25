@@ -15,7 +15,7 @@ public :
   void init();
   void draw();
   void animate();
-  GLuint loadTexture(const char* filename, int width, int height);
+  GLuint loadTexture(QString filename);
 
 private :
   vector<Vertex>listVertex;
@@ -23,7 +23,7 @@ private :
   vector<Normale>listNormale;
   vector<Face>listFace;
   vector<TripletFace>listTriplet;
-  GLuint texture;
+  GLuint texture[1];
   vector<string> split(string sentence, char delimiter);
 
 };
