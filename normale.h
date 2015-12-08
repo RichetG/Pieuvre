@@ -1,3 +1,6 @@
+#ifndef NORMALE
+#define NORMALE
+
 #include <string>
 using namespace std;
 
@@ -16,3 +19,5 @@ public:
 private:
     double x, y, z;
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef TEXTURE
+#define TEXTURE
+
 #include <string>
 using namespace std;
 
@@ -14,3 +17,5 @@ public:
 private:
     double x, y;
 };
+
+#endif

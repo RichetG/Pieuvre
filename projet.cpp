@@ -5,7 +5,7 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 
-using namespace qglviewer;
+//using namespace qglviewer;
 using namespace std;
 
 ///////////////////////   V i e w e r  ///////////////////////
@@ -15,8 +15,43 @@ void Viewer::init()
 {
   restoreStateFromFile();
   glDisable(GL_LIGHTING);
-  projet =new Projet("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\ElPoulpo.obj");
-  GLuint texture=projet->loadTexture("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\poulpotext.jpg");
+  projet =new Projet("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Maillage\\Poulpo.obj");
+  GLuint texture=projet->loadTexture("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Texture\\Poulpo.jpg");
+  vector<string> listFilePoids;
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Bassin.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Head.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta1os1.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta1os2.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta1os3.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta1os4.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta1os5.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta1os6.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta2os1.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta2os2.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta2os3.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta2os4.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta2os5.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta2os6.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta3os1.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta3os2.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta3os3.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta3os4.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta3os5.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta3os6.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta4os1.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta4os2.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta4os3.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta4os4.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta4os5.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta4os6.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta5os1.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta5os2.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta5os3.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta5os4.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta5os5.wei");
+  listFilePoids.push_back("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Skelet\\Poulpe.maSkelet_Tenta5os6.wei");
+  projet->poids(listFilePoids);
+  projet->joints("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\Script_Mkf\\Poulpo.mkf");
   setGridIsDrawn();
   startAnimation();
 
@@ -152,4 +187,40 @@ vector<string> Projet::split(string sentence, char delimiter){
         tmp.push_back(mot);
     }
     return tmp;
+}
+
+void Projet::poids(vector<string> listes){
+    for(int i=0; i<listes.size(); i++){
+        ifstream fichier(listes.at(i).c_str(), ios::in | ios::binary);
+        string ligne;
+        if(fichier){
+            while(getline(fichier, ligne)){
+                vector<string> tab=split(ligne, ' ');
+                vector<double> tmp;
+                for(int j=0; j<listVertex.size(); j++){
+                    tmp.clear();
+                    tmp=listVertex.at(j).getPoids();
+                    tmp.push_back(std::atof(tab.at(j).c_str()));
+                    listVertex.at(j).setPoids(tmp);
+                }
+            }
+        }
+    }
+}
+
+void Projet::joints(string file){
+    ifstream fichier(file.c_str(), ios::in | ios::binary);
+    string ligne;
+    if(fichier){
+        while(getline(fichier, ligne)){
+            vector<string> tab=split(ligne, ' ');
+            vector<double> tmp;
+            for(int i=0; i<tab.size(); i++){
+                if(i%6==0){
+                    Joint *joint=new Joint(std::atof(tab.at(i).c_str()), std::atof(tab.at(i+1).c_str()), std::atof(tab.at(i+2).c_str()), std::atof(tab.at(i+3).c_str()), std::atof(tab.at(i+4).c_str()), std::atof(tab.at(i+5).c_str()));
+                    jointure.push_back(joint);
+                }
+            }
+        }
+    }
 }

@@ -34,7 +34,5 @@ int main(int argc, char** argv)
 
   viewer.show();
 
-  /*Projet *projet=new Projet("C:\\Users\\guillaume\\Documents\\Matiere informatique\\M2\\inf2344\\libQGLViewer-2.6.3\\examples\\Pieuvre\\testCube.obj");
-  projet->draw();*/
   return application.exec();
 }

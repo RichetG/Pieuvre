@@ -11,18 +11,20 @@ TEMPLATE = app
 TARGET   = animation
 
 HEADERS  = \
-    projet.h \
     vertex.h \
     face.h \
     normale.h \
     texture.h \
-    tripletface.h
+    tripletface.h \
+    joint.h \
+    projet.h
 SOURCES  = main.cpp \
-    projet.cpp \
     vertex.cpp \
     normale.cpp \
     face.cpp \
     tripletface.cpp \
-    texture.cpp
+    texture.cpp \
+    joint.cpp \
+    projet.cpp
 
 include( ../examples.pri )

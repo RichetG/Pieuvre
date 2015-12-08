@@ -1,3 +1,6 @@
+#ifndef TRIPLETFACE
+#define TRIPLETFACE
+
 #include <string>
 using namespace std;
 
@@ -17,3 +20,5 @@ public:
 private:
     double v, vt, vn;
 };
+
+#endif

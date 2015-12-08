@@ -1,3 +1,6 @@
+#ifndef FACE
+#define FACE
+
 #include <string>
 #include <vector>
 #include "tripletface.h"
@@ -16,3 +19,5 @@ public:
 private:
     vector<TripletFace>listTriplets;
 };
+
+#endif

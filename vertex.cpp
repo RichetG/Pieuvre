@@ -75,6 +75,28 @@ void Vertex::setZ(double z){
  */
 string Vertex::print(){
     stringstream ligne;
-    ligne<<"v "<<x<<" "<<y<<" "<<z;
+    ligne<<"v "<<x<<" "<<y<<" "<<z<<" poids:[ ";
+    for(int i=0; i<tabPoids.size(); i++){
+        ligne<<tabPoids.at(i)<<" ";
+    }
+    ligne<<"]";
     return ligne.str();
+}
+
+/**
+ * Getter de la liste de poids
+ * @brief Vertex::getPoids
+ * @return une liste de poids
+ */
+vector<double> Vertex::getPoids(){
+    return tabPoids;
+}
+
+/**
+ * Setter de la liste de poids
+ * @brief Vertex::addPoids
+ * @param tabPoids
+ */
+void Vertex::setPoids(vector<double> tabPoids){
+    this->tabPoids=tabPoids;
 }

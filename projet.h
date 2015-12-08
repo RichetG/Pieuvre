@@ -1,9 +1,13 @@
+#ifndef PROJET
+#define PROJET
+
 #include <QGLViewer/qglviewer.h>
 #include <vector>
 #include "vertex.h"
 #include "face.h"
 #include "normale.h"
 #include "texture.h"
+#include "joint.h"
 using namespace std;
 
 class Projet
@@ -16,6 +20,8 @@ public :
   void draw();
   void animate();
   GLuint loadTexture(QString filename);
+  void poids(vector<string> listes);
+  void joints(string file);
 
 private :
   vector<Vertex>listVertex;
@@ -25,7 +31,7 @@ private :
   vector<TripletFace>listTriplet;
   GLuint texture[1];
   vector<string> split(string sentence, char delimiter);
-
+  vector<Joint*>jointure;
 };
 
 class Viewer : public QGLViewer
@@ -38,3 +44,5 @@ protected :
 private:
     Projet* projet;
 };
+
+#endif
