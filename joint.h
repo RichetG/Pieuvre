@@ -13,13 +13,18 @@ class Joint{
 public:
     Joint(double x, double y, double z, double rotX, double rotY, double rotZ);
     Frame* getFrameCourant();
+    double getX();
+    double getY();
+    double getZ();
     void setPosition(double x, double y, double z);
     void setRotation(double rotX, double rotY, double rotZ);
+    void rotateAroundPoint(Quaternion & rotation, Vec & point);
+    Vec getPosition();
     Frame* getFrameOrigine();
 
 private:
     double x, y, z, rotX, rotY, rotZ;
-    Frame* frame, *origine;
+    Frame *origine, *frame;
 };
 
 #endif

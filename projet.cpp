@@ -59,7 +59,7 @@ void Viewer::init()
 
 void Viewer::draw()
 {
-    projet->init();
+    projet->draw();
 }
 
 void Viewer::animate()
@@ -85,6 +85,7 @@ void Projet::parser(string file)
     listNormale.clear();
     listFace.clear();
     listTexture.clear();
+    listOrigine.clear();
     ifstream fichier(file.c_str(), ios::in | ios::binary);
     string ligne;
     if(fichier){
@@ -92,7 +93,9 @@ void Projet::parser(string file)
             if(ligne.compare(0, 2, "v ")==0){
                 vector<string>mots=split(ligne, ' ');
                 Vertex *vertex=new Vertex(std::atof(mots.at(1).c_str()), std::atof(mots.at(2).c_str()),std::atof(mots.at(3).c_str()));
+                Vertex *vertexCopie=new Vertex(std::atof(mots.at(1).c_str()), std::atof(mots.at(2).c_str()),std::atof(mots.at(3).c_str()));
                 listVertex.push_back(*vertex);
+                listOrigine.push_back(*vertexCopie);
             }else if(ligne.compare(0, 2, "vt")==0){
                 vector<string>mots=split(ligne, ' ');
                 Texture *texture=new Texture(std::atof(mots.at(1).c_str()), std::atof(mots.at(2).c_str()));
@@ -123,12 +126,6 @@ void Projet::parser(string file)
 
 void Projet::draw()
 {
-
-}
-
-
-void Projet::init()
-{
     glLineWidth(1.0);
     for(int i=0; i<listFace.size(); i++){
         glBegin(GL_POLYGON);
@@ -145,9 +142,22 @@ void Projet::init()
     }
 }
 
-void Projet::animate()
+
+void Projet::init()
 {
 
+}
+
+void Projet::animate()
+{
+    /*for(int i=0; i<listVertex.size(); i++){
+        posVertexCourant=null;
+        for(int j=0; j<jointure.size(); j++){
+            Vec temp;
+            temp=jointure.at(j).getFrameOrigine()->coordinateOf(listOrigine.at(i));
+
+        }
+    }*/
 }
 
 /**

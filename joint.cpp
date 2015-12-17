@@ -25,7 +25,7 @@ Joint::Joint(double x, double y, double z, double rotX, double rotY, double rotZ
     q.normalize();
     frame->setOrientation(q);
     frame->setPosition(Vec(x, y, z));
-    origine=frame;
+    origine=new Frame(*frame);
 }
 
 /**
@@ -46,6 +46,52 @@ Frame* Joint::getFrameCourant(){
  */
 void Joint::setPosition(double x, double y, double z){
     frame->setPosition(Vec(x, y, z));
+}
+
+/**
+ * @brief Joint::getX
+ * @return
+ */
+double Joint::getX()
+{
+    return x;
+}
+
+/**
+ * @brief Joint::getY
+ * @return
+ */
+double Joint::getY()
+{
+    return y;
+}
+
+/**
+ * @brief Joint::getZ
+ * @return
+ */
+double Joint::getZ()
+{
+    return z;
+}
+
+/**
+ * @brief Joint::rotateAroundPoint
+ * @param rotation
+ * @param point
+ */
+void Joint::rotateAroundPoint(Quaternion &rotation, Vec &point)
+{
+    frame->rotateAroundPoint(rotation, point);
+}
+
+/**
+ * @brief Joint::getPosition
+ * @return
+ */
+Vec Joint::getPosition()
+{
+    return frame->position();
 }
 
 /**

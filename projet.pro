@@ -17,7 +17,7 @@ HEADERS  = \
     texture.h \
     tripletface.h \
     joint.h \
-    projet.h
+    projet.h \
     GloveAcquisitor/DataGloveReceiver/DataGloveReceiver.h \
     GloveAcquisitor/DataGloveSender/DataGloveSender.h \
     GloveAcquisitor/CoordinateConverter/CoordinateConverter.h
@@ -28,12 +28,11 @@ SOURCES  = main.cpp \
     tripletface.cpp \
     texture.cpp \
     joint.cpp \
-    projet.cpp
+    projet.cpp \
     GloveAcquisitor/DataGloveReceiver/DataGloveReceiver_Network.cpp \
     GloveAcquisitor/DataGloveReceiver/DataGloveReceiver_Serialization.cpp \
-    GloveAcquisitor/DataGloveReceiver/test_deserialize.cpp \
     GloveAcquisitor/DataGloveSender/DataGloveSender_Network.cpp \
     GloveAcquisitor/DataGloveSender/DataGloveSender_Serialization.cpp \
-    GloveAcquisitor/DataGloveSender/test_serialize.cpp \
     GloveAcquisitor/CoordinateConverter/CoordinateConverter.cpp
 
+include( ../examples.pri )

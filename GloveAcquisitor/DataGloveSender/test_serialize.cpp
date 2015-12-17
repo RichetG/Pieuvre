@@ -6,16 +6,14 @@
 
 #include "DataGloveSender.h"
 
-using namespace std;
+vector<double> gen_random_vec() {
 
-std::vector<double> gen_random_vec() {
-
-	std::vector<double> v;
+    vector<double> v;
 
 	double lower_bound = 0;
 	double upper_bound = 1000;
-	std::uniform_real_distribution<double> unif(lower_bound, upper_bound);
-	std::default_random_engine re;
+    std::uniform_real_distribution<double> unif(lower_bound, upper_bound);
+    std::default_random_engine re;
 
 	for (int i = 0; i < 30; i++) {
 		double d = unif(re);

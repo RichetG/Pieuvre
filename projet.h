@@ -24,7 +24,7 @@ public :
   void joints(string file);
 
 private :
-  vector<Vertex>listVertex;
+  vector<Vertex>listVertex, listOrigine;
   vector<Texture>listTexture;
   vector<Normale>listNormale;
   vector<Face>listFace;
@@ -32,6 +32,7 @@ private :
   GLuint texture[1];
   vector<string> split(string sentence, char delimiter);
   vector<Joint*>jointure;
+  Vec posVertexCourant;
 };
 
 class Viewer : public QGLViewer
