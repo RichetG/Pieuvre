@@ -2,26 +2,32 @@
 
 CoordinateConverter::CoordinateConverter()
 {
-    l0_thumb = 9.0;
+    l0_thumb = 5.0;
     l0_index = 10.0;
     l0_middle = 10.0;
     l0_ring = 9.0;
     l0_pinky = 9.0;
 
-    l1_thumb = 4.0;
-    l1_index = 5.0;
-    l1_middle = 5.0;
+    l1_thumb = 5.0;
+    l1_index = 6.0;
+    l1_middle = 6.0;
     l1_ring = 5.0;
-    l1_pinky = 4.0;
+    l1_pinky = 4.5;
 
-    l2_thumb = 3.0;
-    l2_index = 5.0;
-    l2_middle = 6.0;
-    l2_ring = 5.0;
-    l2_pinky = 4.0;
+    l2_thumb = 4.0;
+    l2_index = 3.0;
+    l2_middle = 3.5;
+    l2_ring = 3.0;
+    l2_pinky = 2.5;
+
+    l3_thumb = 3.0;
+    l3_index = 2.5;
+    l3_middle = 2.5;
+    l3_ring = 2.5;
+    l3_pinky = 2.0;
 }
 
-CoordinateConverter::CoordinateConverter(vector<double> l0_list, vector<double> l1_list, vector<double> l2_list)
+CoordinateConverter::CoordinateConverter(vector<double> l0_list, vector<double> l1_list, vector<double> l2_list, vector<double> l3_list)
 {
     l0_thumb = l0_list.at(0);
     l0_index = l0_list.at(1);
@@ -40,6 +46,12 @@ CoordinateConverter::CoordinateConverter(vector<double> l0_list, vector<double> 
     l2_middle = l2_list.at(2);
     l2_ring = l2_list.at(3);
     l2_pinky = l2_list.at(4);
+
+    l3_thumb = l3_list.at(0);
+    l3_index = l3_list.at(1);
+    l3_middle = l3_list.at(2);
+    l3_ring = l3_list.at(3);
+    l3_pinky = l3_list.at(4);
 }
 
 double CoordinateConverter::degToRad(double d)
@@ -56,6 +68,7 @@ pair< vector<double>,vector<double> > CoordinateConverter::PolarToCartesian(Fing
 {
     buff1.clear();
     buff2.clear();
+    buff3.clear();
 
     switch(finger)
     {
@@ -64,6 +77,7 @@ pair< vector<double>,vector<double> > CoordinateConverter::PolarToCartesian(Fing
             l0 = l0_thumb;
             l1 = l1_thumb;
             l2 = l2_thumb;
+            l3 = l3_thumb;
             break;
         }
         case 1:
@@ -71,6 +85,7 @@ pair< vector<double>,vector<double> > CoordinateConverter::PolarToCartesian(Fing
             l0 = l0_index;
             l1 = l1_index;
             l2 = l2_index;
+            l3 = l3_index;
             break;
         }
         case 2:
@@ -78,6 +93,7 @@ pair< vector<double>,vector<double> > CoordinateConverter::PolarToCartesian(Fing
             l0 = l0_middle;
             l1 = l1_middle;
             l2 = l2_middle;
+            l3 = l3_middle;
             break;
         }
         case 3:
@@ -85,6 +101,7 @@ pair< vector<double>,vector<double> > CoordinateConverter::PolarToCartesian(Fing
             l0 = l0_ring;
             l1 = l1_ring;
             l2 = l2_ring;
+            l3 = l3_ring;
             break;
         }
         case 4:
@@ -92,51 +109,51 @@ pair< vector<double>,vector<double> > CoordinateConverter::PolarToCartesian(Fing
             l0 = l0_pinky;
             l1 = l1_pinky;
             l2 = l2_pinky;
+            l3 = l3_pinky;
             break;
         }
         default:
         {
-            l0 = l1 = l2 = 0.0;
+            l0 = l1 = l2 = l3 = 0.0;
             break;
         }
     }
 
-    // Middle point
+    // Metacarpal point
 
-    if (finger == 0) // THUMB special case
-    {
-        x = l0 + ( l1 * cos(degToRad(angles.at(1))) );
-        y = l1 * sin(degToRad(angles.at(1)));
-        z = 0.0;
-    } else { // other fingers
-        x = l0 + ( l1 * cos(degToRad(angles.at(0))) );
-        y = l1 * sin(degToRad(angles.at(0)));
-        z = 0.0;
-    }
+    // x1 = l0 + l1.cos(am)
+    // y1 = l1.sin(am)
+    x = l0 + ( l1 * cos(degToRad(angles.at(0))) );
+    y = l1 * sin(degToRad(angles.at(0)));
 
     buff1.push_back(x);
     buff1.push_back(y);
-    buff1.push_back(z);
 
-    // End point
+    // Proximal point
 
-    if (finger == 0)
-    {
-        x = l0 + x + ( l2 * cos(degToRad(angles.at(1) + angles.at(2))) );
-        y = y + ( l2 * sin(degToRad(angles.at(1) + angles.at(2))) );
-        z = 0;
-    } else {
-        x = l0 + x + ( l2 * cos(degToRad(angles.at(0) + angles.at(2))) );
-        y = y + ( l2 * sin(degToRad(angles.at(0) + angles.at(2))) );
-        z = 0.0;
-    }
+    // x2 = x1 + l2.cos(am + ap)
+    // y2 = y1 + l2.sin(am + ap)
+    x = x + ( l2 * cos(degToRad(angles.at(0) + angles.at(1))) );
+    y = y + ( l2 * sin(degToRad(angles.at(0) + angles.at(1))) );
 
     buff2.push_back(x);
     buff2.push_back(y);
-    buff2.push_back(z);
 
+    // Distal point
+
+    // x3 = x2 + l3.cos(am + ap + ad)
+    // y3 = y2 + l3.sin(am + ap + ad)
+    x = x + ( l3 * cos(degToRad(angles.at(0) + angles.at(1) + angles.at(2))) );
+    y = y + ( l3 * sin(degToRad(angles.at(0) + angles.at(1) + angles.at(2))) );
+
+    buff3.push_back(x);
+    buff3.push_back(y);
+
+    // ********************
+    // CHANGE HERE TO CHOOSE BETWEEN METACARPAL / PROXIMAL / DISTAL POINTS
+    // Default : met + dist
     pair_buff.first = buff1;
-    pair_buff.second = buff2;
+    pair_buff.second = buff3;
 
     return pair_buff;
 }

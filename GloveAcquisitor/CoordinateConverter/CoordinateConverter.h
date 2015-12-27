@@ -20,11 +20,12 @@ enum Finger {
 /**
  * @brief Polar to cartesian converter class
  *
- * The Cyberglove system give two angles per finger. This class converts these angles into
- * the cartesian system. In output each finger has two points (middle and extremity) with (x,y)
- * coordinates.
+ * The Cyberglove system give three angles per finger. This class converts these angles into
+ * the cartesian system. In output each finger has two points (first and third by default, but you can change 
+ * that in PolarToCartesian function) with (x,y) coordinates.
  * Distances from the hand's root to each articulation can be passed to the constructor :
- * For each finger : [hand_root ----l0---- metacarpal_angle ----l1---- distal_angle ----l2---- finger_end]
+ * For each finger : 
+ * [hand_root ----l0---- metacarpal_angle ----l1---- proximal_angle ----l2---- distal_angle ----l3---- finger_end]
  * You can also use the default constructor which uses standard values.
  */
 class CoordinateConverter
@@ -39,27 +40,19 @@ public:
   /**
    * @brief CoordinateConverter
    * @param l0_list root to metacarpal lengths (thumb --> pinky)
-   * @param l1_list met. to distal lengths (th. --> p.)
-   * @param l2_list distal to finger end lengths (th. --> p.)
+   * @param l1_list met. to proximal lengths (th. --> p.)
+   * @param l2_list proximal to distal lengths (th. --> p.)
+   * @param l3_list distal to finger end lengths (th. --> p.)
    */
-  CoordinateConverter(vector<double> l0_list, vector<double> l1_list, vector<double> l2_list);
+  CoordinateConverter(vector<double> l0_list, vector<double> l1_list, vector<double> l2_list, vector<double> l3_list);
 
   /**
    * @brief PolarToCartesian
    * @param finger Finger identifier (enum)
    * @param angles Cyberglove datas (met. -- prox. -- dist.)
-   * @return A vector pair. The first vector contains x,y coordinates for the middle point of the finger. The second contains x,y coordinates for the end point.
+   * @return A vector pair. Two (x,y) coordinates couples.
    *
    * Converts "metacarpal" and "distal" angles into finger points positions.
-   *
-   * Special cases :
-   * ** THUMB : "metacarpal" datas are displayed on "proximal". Probably a glove driver bug.
-   * This case is treated in the implementation so you can forget about it. Just consider that THUMB is fully functional.
-   * ** PINKY : datas from "metacarpal" are wrong, because the glove sensor is broken.
-   * You'll have to handle it, maybe with random loop values.
-   *
-   * The glove also provide indications on the distance between fingers. This implementation ignore it.
-   * So the "proximal" category is never used, except for the thumb's special case.
    */
   pair< vector<double>,vector<double> > PolarToCartesian(Finger finger, vector<double> angles);
 
@@ -80,14 +73,15 @@ private:
   double radToDeg(double r);
 
 
-  vector<double> buff1, buff2;
+  vector<double> buff1, buff2, buff3;
   pair< vector<double>,vector<double> > pair_buff;
-  double x, y, z;
+  double x, y;
   //double r, phi, theta;
-  double l0, l1, l2;
+  double l0, l1, l2, l3;
 
   // Hand dimensions
   double l0_thumb, l0_index, l0_middle, l0_ring, l0_pinky;
   double l1_thumb, l1_index, l1_middle, l1_ring, l1_pinky;
   double l2_thumb, l2_index, l2_middle, l2_ring, l2_pinky;
+  double l3_thumb, l3_index, l3_middle, l3_ring, l3_pinky;
 };
