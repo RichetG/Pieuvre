@@ -92,6 +92,10 @@ vector<double> Vertex::getPoids(){
     return tabPoids;
 }
 
+double Vertex::PoidJoint(int i){
+    return tabPoids.at(i);
+}
+
 /**
  * Setter de la liste de poids
  * @brief Vertex::addPoids
@@ -99,4 +103,10 @@ vector<double> Vertex::getPoids(){
  */
 void Vertex::setPoids(vector<double> tabPoids){
     this->tabPoids=tabPoids;
+}
+
+qglviewer::Vec Vertex::convertionVertex(){
+    qglviewer::Vec temp;
+    temp.setValue(x, y, z);
+    return temp;
 }

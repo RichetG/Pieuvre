@@ -8,6 +8,8 @@
 #include "normale.h"
 #include "texture.h"
 #include "joint.h"
+
+#include "ik.h"
 using namespace std;
 
 class Projet
@@ -19,19 +21,21 @@ public :
   void init();
   void draw();
   void animate();
-  GLuint loadTexture(QString filename);
+  void loadTexture(GLuint texture, QString filename);
+  GLuint choixTexture(int i);
+ // GLuint loadTexture(QString filename);
   void poids(vector<string> listes);
   void joints(string file);
+  vector<Vertex>listVertex, listOrigine;
+  vector<Joint*>jointure;
 
 private :
-  vector<Vertex>listVertex, listOrigine;
   vector<Texture>listTexture;
   vector<Normale>listNormale;
   vector<Face>listFace;
   vector<TripletFace>listTriplet;
-  GLuint texture[1];
   vector<string> split(string sentence, char delimiter);
-  vector<Joint*>jointure;
+
   Vec posVertexCourant;
 };
 
@@ -44,6 +48,15 @@ protected :
 
 private:
     Projet* projet;
+    GLuint texture[6];
+    int random=0, cpt=0;
+
+    std::vector<qglviewer::Vec> chain;
+    std::vector<Joint*> joints;
+    ik inv_kinematic;
+    char c;
+    Vec butTenta1, butTenta2, butTenta3, butTenta4, butTenta5;
+    double angle;
 };
 
 #endif

@@ -20,7 +20,8 @@ HEADERS  = \
     projet.h \
     GloveAcquisitor/DataGloveReceiver/DataGloveReceiver.h \
     GloveAcquisitor/DataGloveSender/DataGloveSender.h \
-    GloveAcquisitor/CoordinateConverter/CoordinateConverter.h
+    GloveAcquisitor/CoordinateConverter/CoordinateConverter.h \
+    ik.h
 SOURCES  = main.cpp \
     vertex.cpp \
     normale.cpp \
@@ -34,5 +35,6 @@ SOURCES  = main.cpp \
     GloveAcquisitor/DataGloveSender/DataGloveSender_Network.cpp \
     GloveAcquisitor/DataGloveSender/DataGloveSender_Serialization.cpp \
     GloveAcquisitor/CoordinateConverter/CoordinateConverter.cpp
+    ik.cpp
 
 include( ../examples.pri )

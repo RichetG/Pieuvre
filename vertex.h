@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <QGLViewer/qglviewer.h>
 using namespace std;
 
 class Vertex{
@@ -13,11 +14,13 @@ public:
     double getY();
     double getZ();
     vector<double> getPoids();
+    double PoidJoint(int i);
     void setX(double x);
     void setY(double y);
     void setZ(double z);
     void setPoids(vector<double>tabPoids);
     string print();
+    qglviewer::Vec convertionVertex();
 
 private:
     double x, y, z;
